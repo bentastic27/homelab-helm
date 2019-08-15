@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ .Chart.Name }}-{{ .Release.Name }}-{{ .Release.Revision }}
 spec:
   selector:
     matchLabels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:{{ .Values.image.tag}}
+        image: nginx:{{ .Values.image.tag }}
         ports:
         - containerPort: 80
         volumeMounts:
@@ -23,5 +23,5 @@ spec:
       volumes:
       - name: docroot
         hostPath:
-          path: {{ .Values.nginx.docRoot }}
+          path: {{ .Values.content.root }}
           type: DirectoryOrCreate
