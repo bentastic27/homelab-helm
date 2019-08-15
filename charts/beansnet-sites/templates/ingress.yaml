@@ -5,6 +5,10 @@ metadata:
   name: {{ .Chart.Name }}-{{ .Release.Name }}-{{ .Release.Revision }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    {{ if .Values.ingress.tls.enabled }}
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: {{ .Values.ingress.tls.clusterIssuer}}
+    {{ end }}
 spec:
   rules:
   - host: {{ .Values.ingress.hostName }}
@@ -18,6 +22,6 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ingress.hostName }}
-    secretName: {{ .Values.ingress.hostName }}-le
+    secretName: {{ .Values.ingress.hostName }}-cert
   {{ end }}
 {{ end }}

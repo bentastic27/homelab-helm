@@ -17,8 +17,9 @@ spec:
         image: nginx:{{ .Values.image.tag }}
         ports:
         - containerPort: 80
+          name: http
         volumeMounts:
-        - mountPath: /usr/share/nginx/
+        - mountPath: /usr/share/nginx/html
           name: docroot
       volumes:
       - name: docroot

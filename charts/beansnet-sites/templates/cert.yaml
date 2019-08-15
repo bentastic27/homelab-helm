@@ -2,11 +2,11 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: {{ .Values.ingress.hostName }}-le
+  name: {{ .Values.ingress.hostName }}-cert
 spec:
-  secretName: {{ .Values.ingress.hostName }}-le
+  secretName: {{ .Values.ingress.hostName }}-cert
   issuerRef:
-    name: letsencrypt-production
+    name: {{ .Values.ingress.tls.clusterIssuer }}
   commonName: {{ .Values.ingress.hostName }}
   acme:
     config:
