@@ -1,3 +1,4 @@
 charts/*/charts
 rke/kube_config_cluster.yml
 rke/*.rkestate
+env.config
