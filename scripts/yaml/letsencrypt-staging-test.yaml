@@ -1,0 +1,10 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example-crt
+spec:
+  secretName: my-letsencrypt-staging-cert
+  commonName: "letsencrypt-staging-test"
+  issuerRef:
+    name: selfsigning-issuer
+    kind: ClusterIssuer
