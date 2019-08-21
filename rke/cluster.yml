@@ -9,4 +9,4 @@ nodes:
 
 cluster_name: local-beansnet
 
-kubernetes_version: v1.14.5-rancher1
+kubernetes_version: v1.14.6-rancher1-1
