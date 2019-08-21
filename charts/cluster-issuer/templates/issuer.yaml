@@ -1,0 +1,38 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.staging.name }}
+spec:
+  acme:
+    # You must replace this email address with your own.
+    # Let's Encrypt will use this to contact you about expiring
+    # certificates, and issues related to your account.
+    email: {{ .Values.email }}
+    server: {{ .Values.staging.server }}
+    privateKeySecretRef:
+      # Secret resource used to store the account's private key.
+      name: {{ .Values.staging.name }}
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - http01:
+        ingress:
+          class: {{ .Values.staging.ingressClass }}
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.prod.name }}
+spec:
+  acme:
+    # The ACME server URL
+    server: {{ .Values.prod.server }}
+    # Email address used for ACME registration
+    email: {{ .Values.email }}
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: {{ .Values.prod.name }}
+    # Enable HTTP01 validations
+    solvers:
+    - http01:
+        ingress:
+          class: {{ .Values.prod.ingressClass }}
