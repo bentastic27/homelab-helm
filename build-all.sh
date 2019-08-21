@@ -17,6 +17,7 @@ bash scripts/init-cert-manager.sh
 helm install charts/cert-manager/ -f answers/cluster-issuer.yml --name cluster-issuer --namespace=cert-manager
 
 # setup sites
+kubectl create namespace sites
 helm install charts/beansnet-sites/ -f answers/pwgen.beansnet.net.yml --name=pwgen-beansnet-net --namespace=sites
 helm install charts/beansnet-sites/ -f answers/beansnet.net.yml --name=beansnet-net --namespace=sites
 helm install charts/beansnet-sites/ -f answers/risk.beansnet.net.yml --name=risk-beansnet-net --namespace=sites
